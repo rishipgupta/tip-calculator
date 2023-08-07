@@ -3,6 +3,7 @@ import { useState } from "react";
 function App() {
   const [bill, setBill] = useState(0);
   const [tipOne, setTipOne] = useState(0)
+  const [tipTwo, setTipTwo] = useState(0)
 
   const handleBillAmountChange = (e) => {
     setBill(bill => e.target.value);
@@ -11,6 +12,12 @@ function App() {
   const handleTipOneChange = (e) => {
     setTipOne(tipOne => e.target.value);
   }
+
+  const handleTipTwoChange = (e) => {
+    setTipTwo(tipTwo => e.target.value);
+  }
+
+  const tipAvg = Math.round(((Number(tipOne) + Number(tipTwo)) / 200) * Number(bill));
 
   return (
     <div>
@@ -27,8 +34,16 @@ function App() {
         </select>
       </div>
       <div>
+        <span>How did you like the service</span><select onChange={handleTipTwoChange}>
+          <option value={0}>Dissatisfied (0%)</option>
+          <option value={5}>It was okay (5%)</option>
+          <option value={10}>It was good (10%)</option>
+          <option value={20}>Absolutely amazing (20%)</option>
+        </select>
+      </div>
+      <div>
         {/* Display */}
-        <h1>{`You pay $${bill ? bill : 0} (${bill} + ${Math.round((tipOne * bill) / 100)})`}</h1>
+        <h1>{`You pay $${Number(bill) + Number(tipAvg) ? Number(bill) + Number(tipAvg) : 0} (${bill ? bill : 0} + ${tipAvg})`}</h1>
       </div>
     </div>
   );
