@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Bill from "./Bill";
+import Tip from "./Tip";
 
 function App() {
   const [bill, setBill] = useState(0);
@@ -30,24 +32,16 @@ function App() {
     <div>
       <h1>Tip Calculator</h1>
       <form onSubmit={handleReset}>
+        <Bill handleBillAmountChange={handleBillAmountChange} />
         <div>
-          <span>How much was the bill? </span> <input type="text" onChange={handleBillAmountChange} />
+          <Tip handleTipOneChange={handleTipOneChange}>
+            <span>How did you like the service</span>
+          </Tip>
         </div>
         <div>
-          <span>How did you like the service</span><select onChange={handleTipOneChange}>
-            <option value={0}>Dissatisfied (0%)</option>
-            <option value={5}>It was okay (5%)</option>
-            <option value={10}>It was good (10%)</option>
-            <option value={20}>Absolutely amazing (20%)</option>
-          </select>
-        </div>
-        <div>
-          <span>How did you like the service</span><select onChange={handleTipTwoChange}>
-            <option value={0}>Dissatisfied (0%)</option>
-            <option value={5}>It was okay (5%)</option>
-            <option value={10}>It was good (10%)</option>
-            <option value={20}>Absolutely amazing (20%)</option>
-          </select>
+          <Tip handleTipTwoChange={handleTipTwoChange}>
+            <span>How did your friend like the service</span>
+          </Tip>
         </div>
         <div>
           {/* Display */}
